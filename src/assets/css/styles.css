@@ -201,7 +201,10 @@ template {
 
 /* COMMON STYLES */
 
-/*html,
+/*
+TODO:
+
+html,
 body {
     overflow-x: hidden;
 }*/
@@ -569,11 +572,9 @@ body {
 
     .intro__header span:nth-child(3) {
         letter-spacing: 1px;
-        /*padding-left: 93px;*/
     }
 
-    .intro__header span:nth-child(4) {        
-        /*padding-left: 38px;*/
+    .intro__header span:nth-child(4) { 
         letter-spacing: 0.6px;
     }
 }
@@ -600,7 +601,13 @@ body {
 }
 
 .running-line_bottom {
-    margin-top: 97px;
+    margin-top: 100px;
+}
+
+@media (min-width: 768px) {
+    .running-line_bottom {
+        margin-top: 97px;
+    }
 }
 
 .running-line__group {
@@ -956,6 +963,7 @@ body {
         max-width: 315px;
         padding-left: 19px;
         padding-bottom: 5px;
+        vertical-align: middle;
     }
 }
 
@@ -965,13 +973,21 @@ body {
     overflow: visible;
 }
 
+.stages-wrapper_grid {
+    margin-top: 53px;
+}
+
 .stages-wrapper::after {
     content: '';
     display: block;
     position: absolute;
-    right: -42px;
-    bottom: 26px;
-    width: 360px;
+
+    left: 50%;
+    top: 0;
+    translate: -47% -74%;  
+    rotate: -3.5deg;
+
+    width: calc(302px + 58 * 1rem);
     aspect-ratio: 360 / 193;
     background-image: image-set(
         url('../images/plane.webp') 1x,
@@ -979,34 +995,46 @@ body {
     );
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 100% 100%;
 
 }
 
-.stages-content {
-
+.stages-wrapper_grid::after {
+    top: unset;
+    left: unset;
+    right: 0;
+    bottom: 0;
+    translate: 11.5% -1%;
+    rotate: 0deg;
 }
 
-.stages-content_grid .stages__cards {
+
+@media (min-width: 1100px) {
+    .stages-wrapper_grid::after {
+        top: 50%;
+        left: unset;
+        right: 0;
+        bottom: unset;
+        translate: 11.5% -10%;
+    }
+}
+
+.stages-wrapper_grid .stages__cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: repeat(5, auto);
     grid-template-areas:
         '_1 _2'
-        '_3 _4'
-        '_5 _6'
+        '_3 _3'
+        '_4 _5'
+        '_6 _6'
         '_7 _7';
     gap: calc(0px + 20 * 1rem);
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    .stages-wrapper {
-        margin-top: 53px;
-    }
-}
-
-@media (min-width: 920px) {
-    .stages-content_grid .stages__cards {
+@media (min-width: 1100px) {
+    .stages-wrapper_grid .stages__cards {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto auto;
         grid-template-areas:
@@ -1016,26 +1044,36 @@ body {
     }
 }
 
-.stages-content_grid .stages__cards-group {
-    display: contents;
+.stages__cards-group {
+    padding: 47px 0 20px;
 }
 
-.stages__card {
+.stages-wrapper_grid .stages__cards-group {
+    display: contents;
+    padding: 0;
+}
+
+.stages__cards {
+    counter-reset: stage-counter;
+}
+
+.stages__card { 
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
     font-size: calc(18px + 2 * 1rem);
     font-weight: 500;
     line-height: 1.2;
-    padding: 20px;
+    padding: 15px 20px;
 }
 
-.stages-content_grid .stages__card {
+.stages-wrapper_grid .stages__card {    
+    padding: 20px;
     background: url('../images/card_bg.webp') repeat left top;
 }
 
 .stages__card::before {
-    content: attr(data-number);
+    content: counter(stage-counter);
     display: flex;
     flex: 0 0 auto;
     flex-flow: row nowrap;
@@ -1053,32 +1091,44 @@ body {
 }
 
 .stages__card[data-number='1'] {
+    counter-set: stage-counter 1;
     grid-area: _1;
 }
 
 .stages__card[data-number='2'] {
+    counter-set: stage-counter 2;
     grid-area: _2;
 }
 
 .stages__card[data-number='3'] {
+    counter-set: stage-counter 3;
     grid-area: _3;
 }
 
 .stages__card[data-number='4'] {
+    counter-set: stage-counter 4;
     grid-area: _4;
 }
 
 .stages__card[data-number='5'] {
+    counter-set: stage-counter 5;
     grid-area: _5;
 }
 
 .stages__card[data-number='6'] {
+    counter-set: stage-counter 6;
     grid-area: _6;
 }
 
 .stages__card[data-number='7'] {
+    counter-set: stage-counter 7;
     grid-area: _7;
-    padding-right: 300px;
+}
+
+@media (min-width: 768px) {
+    .stages__card[data-number='7'] {
+        padding-right: 300px;
+    }
 }
 
 .carousel_mounted .stages__carousel {
@@ -1093,34 +1143,41 @@ body {
 
 }
 
+.stages__carousel-controls {
+    margin-top: 28px;
+}
+
+.stages-wrapper_grid .stages__carousel-controls {
+    display: none;
+}
+
 
 /* --- */
 
 .participants {
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, auto);
     grid-template-areas:
-        'header controls'
-        'carousel carousel';
-
-    margin-top: 201px;
+        'header'
+        'carousel'
+        'controls';
+    margin-top: calc(121px + 52 * 1rem);
 }
 
 .participants__header {
     grid-area: header;
     font-family: 'YaMerriweather';
-    font-size: 54px;
+    font-size: calc(36px + 18 * 1rem);
     font-weight: normal;
-    line-height: 1.2;
+    line-height: 1.1;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    vertical-align: middle;    
+    letter-spacing: 0.6px;
 }
 
 .participants__carousel {
     grid-area: carousel;
-    margin-top: 16px;
+    margin-top: calc(0px + 16 * 1rem);
 }
 
 .participants__carousel-controls {
@@ -1128,7 +1185,7 @@ body {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .participants__card {
@@ -1136,7 +1193,7 @@ body {
     flex-flow: column nowrap;
     align-items: center;
     height: 100%;
-    padding: 43px;
+    padding: 40px 45px;
 }
 
 .participants__card-figure {
@@ -1157,7 +1214,7 @@ body {
     line-height: 1.2;
     text-align: center;
     color: #151515;
-    margin-top: 28px;
+    margin: 28px -32px 0;
 }
 
 .participants__card-rank {
@@ -1165,7 +1222,7 @@ body {
     line-height: 1.2;
     text-align: center;
     color: #727272;
-    margin-top: 5px;
+    margin: 7px -32px 0;
 }
 
 .participants__card-button {
@@ -1188,6 +1245,39 @@ body {
     font-weight: 300;
     color: #FFF;
     background-color: #3057A2;
+}
+
+@media (min-width: 768px) {
+    .participants__header {
+        line-height: 1.2;
+        letter-spacing: 0.4px;
+    }
+
+    .participants__card {
+        padding: 43px;
+    }
+
+    .participants__card-rank {
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 920px) {
+    .participants {
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            'header controls'
+            'carousel carousel';
+    }
+
+    .participants__header {
+        white-space: nowrap;
+    }
+
+    .participants__carousel-controls {
+        justify-content: flex-end;
+    }
 }
 
 /* --- */
@@ -1233,16 +1323,26 @@ body {
 /* ---  */
 
 .carousel-controls,
-.carousel-controls__counter {
+.carousel-controls__indicators,
+.carousel-controls__counter,
+.carousel-controls__dots {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
 }
+.carousel-controls {
+    user-select: none;
+}
+
+.carousel-controls__indicators {
+    flex: 0 0 content;
+}
 
 .carousel-controls__counter {
-    flex: 0 0 63px;
+    flex: 0 0 auto;
     font-size: 16px;
+    min-width: 59px;
 }
 
 .carousel-controls__counter-sep,
@@ -1251,7 +1351,17 @@ body {
 }
 
 .carousel-controls__counter-sep {
-    padding: 0 5px;
+    padding: 0 2px;
+}
+
+@media (min-width: 768px) {
+    .carousel-controls__counter {
+        min-width: 63px;
+    }
+
+    .carousel-controls__counter-sep {
+        padding: 0 3px;
+    }
 }
 
 .carousel-controls__counter-current {
@@ -1262,9 +1372,28 @@ body {
 
 }
 
+.carousel-controls__dots {
+    justify-content: space-between;
+    gap: 6px;
+    padding: 0 16px;
+}
+
+.carousel-controls__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: default;
+    background-color: #D9D9D9; 
+}
+
+.carousel-controls__dot_active {
+    background-color: #313131; 
+}
+
 .carousel-controls__button {
     --button-size: 36px;
 
+    flex: 0 0 auto;
     width: var(--button-size);
     height: var(--button-size);
     background-repeat: no-repeat;

@@ -13,6 +13,7 @@ export class Carousel {
     #buttonNextEl   = null;
     #countCurrentEl = null;
     #countTotalEl   = null;
+    #dotEls         = null;
 
     #totalSlideCount   = null;
     #currentSlideIndex = null;
@@ -23,6 +24,8 @@ export class Carousel {
 
     #autoPlay      = null;
     #autoPlayDelay = null;
+    #loop          = null;
+    #dots          = null;
     #breakpoints   = null;
 
     #isChangingSlide     = false;
@@ -51,6 +54,7 @@ export class Carousel {
         this.#buttonNextEl        = null;
         this.#countCurrentEl      = null;
         this.#countTotalEl        = null;
+        this.#dotEls              = null;
         this.#totalSlideCount     = null;
         this.#currentSlideIndex   = null;
         this.#slidesPerPage       = null;
@@ -59,6 +63,8 @@ export class Carousel {
         this.#autoPlayTimer       = null;
         this.#autoPlay            = null;
         this.#autoPlayDelay       = null;
+        this.#loop                = null;
+        this.#dots                = null;
         this.#breakpoints         = null;
         this.#isChangingSlide     = null;
         this.#transitionDirection = null;
@@ -77,8 +83,10 @@ export class Carousel {
         this.#setupResizeObserver();  // last!
 
         this.#reflow();
+        this.#updateControls();
         this.#redrawTotalSlides();
         this.#redrawCurrentSlide();
+        this.#redrawDots();
 
         this.#setupTimer();
         this.#restartTimer();
@@ -91,8 +99,26 @@ export class Carousel {
     };
 
     #redrawTotalSlides = () => {
-        if (this.#countTotalEl) {
+        if (!this.#dots && this.#countTotalEl) {
             this.#countTotalEl.textContent = String(this.#totalSlideCount);            
+        }
+    };
+
+    #redrawCurrentSlide = () => {
+        if (!this.#dots && this.#countCurrentEl) {
+            this.#countCurrentEl.textContent = String(this.#currentSlideIndex + 1);
+        }
+    };
+
+    #redrawDots = () => {
+        if (this.#dots) {
+            this.#dotEls.forEach((dotEl, i) => {
+                if (this.#currentSlideIndex === i) {
+                    dotEl.classList.add('carousel-controls__dot_active');
+                } else {
+                    dotEl.classList.remove('carousel-controls__dot_active');
+                }
+            });
         }
     };
 
@@ -107,6 +133,8 @@ export class Carousel {
         this.#controlsNestEl = options.controlsNestEl ?? null;
         this.#autoPlay       = options.autoPlay ?? false;
         this.#autoPlayDelay  = options.autoPlayDelay ?? 5000;
+        this.#loop           = options.loop ?? false;
+        this.#dots           = options.dots ?? false;
         this.#breakpoints    = [ ...(options.breakpoints ?? []) ];
 
         this.#breakpoints.sort((a, b) => {
@@ -119,18 +147,44 @@ export class Carousel {
         this.#slideEls = [ ...this.#rootEl.querySelectorAll('.carousel__slide') ];
 
         if (this.#controlsNestEl) {
-            const templateEl = document.getElementById('tpl-carousel-controls');
+            let templateEl = document.getElementById('tpl-carousel-controls');
 
-            if (templateEl) {
-                const controlsEl = this.#controlsEl = templateEl.content.firstElementChild.cloneNode(true);
+            const controlsEl = this.#controlsEl = templateEl.content.firstElementChild.cloneNode(true);
 
-                this.#buttonPrevEl   = controlsEl.querySelector('.carousel-controls__button_prev');
-                this.#buttonNextEl   = controlsEl.querySelector('.carousel-controls__button_next');
-                this.#countCurrentEl = controlsEl.querySelector('.carousel-controls__counter-current');
-                this.#countTotalEl   = controlsEl.querySelector('.carousel-controls__counter-total');
+            this.#buttonPrevEl = controlsEl.querySelector('.carousel-controls__button_prev');
+            this.#buttonNextEl = controlsEl.querySelector('.carousel-controls__button_next');
 
-                this.#controlsNestEl.append(controlsEl);
+            const indicatorsEl = controlsEl.querySelector('.carousel-controls__indicators');
+
+            if (this.#dots) {
+                templateEl = document.getElementById('tpl-carousel-dots');
+
+                const dotsEl = templateEl.content.firstElementChild.cloneNode(true);
+                const dotEl  = dotsEl.querySelector('.carousel-controls__dot');
+                const dotEls = this.#dotEls = [ dotEl ];
+
+                const extraDotCount = this.#slideEls.length - 1;
+
+                for (let i = 0; i < extraDotCount; ++i) {
+                    const extraDotEl = dotEl.cloneNode(true);
+
+                    dotEls.push(extraDotEl);
+                    dotsEl.appendChild(extraDotEl);
+                }
+
+                indicatorsEl.appendChild(dotsEl);
+            } else {
+                templateEl = document.getElementById('tpl-carousel-counter');
+
+                const counterEl = templateEl.content.firstElementChild.cloneNode(true);
+
+                this.#countCurrentEl = counterEl.querySelector('.carousel-controls__counter-current');
+                this.#countTotalEl   = counterEl.querySelector('.carousel-controls__counter-total');
+
+                indicatorsEl.appendChild(counterEl);
             }
+
+            this.#controlsNestEl.append(controlsEl);
         }
     };
 
@@ -190,7 +244,7 @@ export class Carousel {
     };
 
     #onChangeSlide = (direction) => {
-        if (this.#isChangingSlide) {
+        if (this.#isChangingSlide || !this.#canChangeSlide(direction)) {
             return;
         }
 
@@ -198,8 +252,26 @@ export class Carousel {
 
         this.#stopTimer();
         this.#changeCounter(direction);
+        this.#updateControls();
         this.#redrawCurrentSlide();
-        this.#startTransition(direction)
+        this.#redrawDots();
+        this.#startTransition(direction);
+    };
+
+    #canChangeSlide = (direction) => {
+        return (
+            this.#loop ||
+            direction < 0 && !this.#isFirstSlide() ||
+            direction > 0 && !this.#isLastSlide()
+        );
+    };
+
+    #isFirstSlide = () => {
+        return this.#currentSlideIndex === 0;
+    };
+
+    #isLastSlide = () => {
+        return this.#currentSlideIndex === (this.#totalSlideCount - 1);
     };
 
     #changeCounter = (direction) => {        
@@ -212,30 +284,37 @@ export class Carousel {
         }
     };
 
-    #redrawCurrentSlide = () => {
-        if (this.#countCurrentEl) {
-            this.#countCurrentEl.textContent = String(this.#currentSlideIndex + 1);
+    #updateControls = () => {
+        if (!this.#loop) {
+            this.#buttonPrevEl.disabled = this.#isFirstSlide();
+            this.#buttonNextEl.disabled = this.#isLastSlide();
         }
     };
 
     #startTransition = (direction) => {
         this.#transitionDirection = direction;
 
-        this.#slidesEl.style.transform = `translateX(${ -100 / this.#slidesPerPage }%)`;
+        requestAnimationFrame(() => {
+            this.#slidesEl.style.transform = `translateX(${ -100 / this.#slidesPerPage }%)`;
 
-        if (direction > 0) {
-            this.#slidesEl.style.transitionDuration = '0.15s';
-        } else {
-            this.#slidesEl.prepend(this.#slidesEl.lastElementChild);
-
-            requestAnimationFrame(() => {
+            if (direction > 0) {
                 this.#slidesEl.style.transitionDuration = '0.15s';
-                this.#slidesEl.style.transform = 'translateX(0)';
-            });
-        }
+            } else {
+                this.#slidesEl.prepend(this.#slidesEl.lastElementChild);
+
+                requestAnimationFrame(() => {
+                    this.#slidesEl.style.transitionDuration = '0.15s';
+                    this.#slidesEl.style.transform = 'translateX(0)';
+                });
+            }
+        });
     };
 
-    #endTransition = () => {
+    #endTransition = (e) => {
+        if (e.target !== this.#slidesEl || !this.#isChangingSlide) {
+            return;
+        }
+
         this.#slidesEl.style.transitionDuration = '0s';
 
         if (this.#transitionDirection > 0) {

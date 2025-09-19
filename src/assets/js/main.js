@@ -3,34 +3,13 @@ import { Carousel } from './utils/carousel.js';
 
 
 
-/*const rootEl = document.body.querySelector('.participants__carousel');
-
-const carousel = Carousel.create(rootEl, {
-    controlsNestEl: document.body.querySelector('.participants__carousel-controls'),
-    autoSlide: true,
-    audoSlideDelay: 4000,
-    breakpoints: [
-        {
-            minWidth: 0,
-            slidesPerPage: 1,
-        },
-        {
-            minWidth: 480,
-            slidesPerPage: 2,
-        },
-        {
-            minWidth: 920,
-            slidesPerPage: 3,
-        },
-    ]
-});*/
-
 const createParticipantsCarousel = () => {
     const carousel = Carousel.create({
         rootEl: document.body.querySelector('.participants__carousel'),
         controlsNestEl: document.body.querySelector('.participants__carousel-controls'),
-        autoPlay: false,
+        //autoPlay: true,
         autoPlayDelay: 4000,
+        loop: true,
         breakpoints: [
             {
                 minWidth: 0,
@@ -50,11 +29,12 @@ const createParticipantsCarousel = () => {
 
 
 const main = () => {
-    // createParticipantsCarousel();
+    createParticipantsCarousel();
 
     // ------------
 
-    const rootEl = document.body.querySelector('.stages__carousel');
+    const wrapperlEl = document.body.querySelector('.stages-wrapper');
+    const carouselEl = document.body.querySelector('.stages__carousel');
     const controlsNestEl = document.body.querySelector('.stages__carousel-controls');
 
     window.carousel = null;  // TODO: change to let!!!
@@ -63,20 +43,21 @@ const main = () => {
         const rootWidth = entries[0].borderBoxSize[0].inlineSize;
 
         if (rootWidth < 716) {
-            rootEl.classList.remove('stages-content_grid');
+            wrapperlEl.classList.remove('stages-wrapper_grid');
 
             carousel ||= Carousel.create({
-                rootEl,
+                rootEl: carouselEl,
                 controlsNestEl,
+                dots: true,
             });
         } else {
-            rootEl.classList.add('stages-content_grid');
+            wrapperlEl.classList.add('stages-wrapper_grid');
 
             carousel = carousel?.destroy();
         }
     });
 
-    resizeObserver.observe(rootEl);
+    resizeObserver.observe(carouselEl);
 };
 
 main();

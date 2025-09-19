@@ -126,12 +126,11 @@
                 </div>
                 <div class="stages__carousel-controls"></div>            
             </section>
-            <!--
             <section class="participants" id="participants">
                 <h3 class="participants__header">Участники турнира</h3>
                 <div class="carousel participants__carousel" style="/* TODO: font-size: 100px; background-color: #999; box-shadow: inset 0 0 0 1px #000; */">
                     <div class="carousel__slides">
-                        <div class="carousel__slide">
+                        <div class="carousel__slide" data-slide="1">
                             <div class="participants__card">
                                 <figure class="participants__card-figure">
                                     <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Хозе-Рауль Капабланка" class="participants__card-image">
@@ -141,7 +140,7 @@
                                 <a href="#" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
-                        <div class="carousel__slide">
+                        <div class="carousel__slide" data-slide="2">
                             <div class="participants__card">
                                 <figure class="participants__card-figure">
                                     <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Эммануил Ласкер" class="participants__card-image">
@@ -151,7 +150,7 @@
                                 <a href="#" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
-                        <div class="carousel__slide">
+                        <div class="carousel__slide" data-slide="3">
                             <div class="participants__card">
                                 <figure class="participants__card-figure">
                                     <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Александр Алехин" class="participants__card-image">
@@ -161,7 +160,7 @@
                                 <a href="#" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
-                        <div class="carousel__slide">
+                        <div class="carousel__slide" data-slide="4">
                             <div class="participants__card">
                                 <figure class="participants__card-figure">
                                     <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Арон Нимцович" class="participants__card-image">
@@ -171,7 +170,7 @@
                                 <a href="#" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
-                        <div class="carousel__slide">
+                        <div class="carousel__slide" data-slide="5">
                             <div class="participants__card">
                                 <figure class="participants__card-figure">
                                     <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Рихард Рети" class="participants__card-image">
@@ -181,7 +180,7 @@
                                 <a href="#" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
-                        <div class="carousel__slide">
+                        <div class="carousel__slide" data-slide="6">
                             <div class="participants__card">
                                 <figure class="participants__card-figure">
                                     <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Остап Бендер" class="participants__card-image">
@@ -195,7 +194,6 @@
                 </div>
                 <div class="participants__carousel-controls"></div>
             </section>
-            -->
         </div>
         <div class="running-line running-line_bottom">
             <div class="running-line__group">
@@ -217,12 +215,20 @@
     <template id="tpl-carousel-controls">
         <div class="carousel-controls">
             <button class="button button_solid button_round carousel-controls__button carousel-controls__button_prev" type="button" aria-label="Предыдущий слайд"></button>
-            <div class="carousel-controls__counter">
-                <div class="carousel-controls__counter-current"></div>
-                <div class="carousel-controls__counter-sep">/</div>
-                <div class="carousel-controls__counter-total"></div>
-            </div>
+            <div class="carousel-controls__indicators"></div>
             <button class="button button_solid button_round carousel-controls__button carousel-controls__button_next" type="button" aria-label="Следующий слайд"></button>                
+        </div>
+    </template>
+    <template id="tpl-carousel-counter">
+        <div class="carousel-controls__counter">
+            <div class="carousel-controls__counter-current"></div>
+            <div class="carousel-controls__counter-sep">/</div>
+            <div class="carousel-controls__counter-total"></div>
+        </div>
+    </template>
+    <template id="tpl-carousel-dots">
+        <div class="carousel-controls__dots">
+            <div class="carousel-controls__dot"></div>
         </div>
     </template>
 
