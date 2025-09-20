@@ -7,7 +7,7 @@
     "type": "commonjs",
     "main": "index.js",
     "scripts": {
-        "start": "http-server -a 0.0.0.0 -p 30451 -o -c-1 src/"
+        "start": "http-server -g -b -a 0.0.0.0 -p 30451 -o -c-1 src/"
     },
     "devDependencies": {
         "http-server": "~14.1.1"

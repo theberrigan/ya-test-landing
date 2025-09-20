@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <base href="/">
@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>Клуб четырех коней</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/golos_text/font.css">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/merriweather/font.css">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
     <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
     <main class="main">
-        <section class="intro">
-            <div class="intro__circle"></div>
+        <section class="intro" id="intro">
+            <div class="intro__circle">
+                <div class="intro__circle-inner"></div>
+            </div>
             <div class="intro__chess-1"></div>
             <div class="intro__chess-2"></div>
             <div class="intro__city"></div>
@@ -38,8 +38,12 @@
                         Международного васюкинского турнира по&nbsp;шахматам
                     </h2>
                     <div class="intro__buttons">
-                        <a class="button intro__button intro__button_solid" href="#support">Поддержать шахматную&nbsp;мысль</a>
-                        <a class="button intro__button intro__button_outline" href="#details">Подробнее о&nbsp;турнире</a>
+                        <div class="intro__button-wrap">
+                            <a class="button intro__button intro__button_solid" href="#support">Поддержать шахматную&nbsp;мысль</a>
+                        </div>
+                        <div class="intro__button-wrap">
+                            <a class="button intro__button intro__button_outline" href="#details">Подробнее о&nbsp;турнире</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,11 +128,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="stages__carousel-controls"></div>            
+                <div class="stages__carousel-controls"></div>
             </section>
             <section class="participants" id="participants">
                 <h3 class="participants__header">Участники турнира</h3>
-                <div class="carousel participants__carousel" style="/* TODO: font-size: 100px; background-color: #999; box-shadow: inset 0 0 0 1px #000; */">
+                <div class="carousel carousel_mounted participants__carousel" style="/* TODO: font-size: 100px; background-color: #999; box-shadow: inset 0 0 0 1px #000; */">
                     <div class="carousel__slides">
                         <div class="carousel__slide" data-slide="1">
                             <div class="participants__card">
@@ -137,7 +141,7 @@
                                 </figure>
                                 <div class="participants__card-name">Хозе-Рауль Капабланка</div>
                                 <div class="participants__card-rank">Чемпион мира по шахматам</div>
-                                <a href="#" class="button participants__card-button">Подробнее</a>
+                                <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="2">
@@ -147,7 +151,7 @@
                                 </figure>
                                 <div class="participants__card-name">Эммануил Ласкер</div>
                                 <div class="participants__card-rank">Чемпион мира по шахматам</div>
-                                <a href="#" class="button participants__card-button">Подробнее</a>
+                                <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="3">
@@ -157,7 +161,7 @@
                                 </figure>
                                 <div class="participants__card-name">Александр Алехин</div>
                                 <div class="participants__card-rank">Чемпион мира по шахматам</div>
-                                <a href="#" class="button participants__card-button">Подробнее</a>
+                                <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="4">
@@ -167,7 +171,7 @@
                                 </figure>
                                 <div class="participants__card-name">Арон Нимцович</div>
                                 <div class="participants__card-rank">Чемпион мира по шахматам</div>
-                                <a href="#" class="button participants__card-button">Подробнее</a>
+                                <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="5">
@@ -177,7 +181,7 @@
                                 </figure>
                                 <div class="participants__card-name">Рихард Рети</div>
                                 <div class="participants__card-rank">Чемпион мира по шахматам</div>
-                                <a href="#" class="button participants__card-button">Подробнее</a>
+                                <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="6">
@@ -187,7 +191,7 @@
                                 </figure>
                                 <div class="participants__card-name">Остап Бендер</div>
                                 <div class="participants__card-rank">Гроссмейстер</div>
-                                <a href="#" class="button participants__card-button">Подробнее</a>
+                                <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                     </div>
@@ -209,14 +213,14 @@
             С&nbsp;подробностями можно познакомиться в&nbsp;главе XXXIV романа Ильи Ильфа и&nbsp;Евгения Петрова «Двенадцать стульев».
         </div>
     </footer>
-     
+
     <!-- /// -->
 
     <template id="tpl-carousel-controls">
         <div class="carousel-controls">
             <button class="button button_solid button_round carousel-controls__button carousel-controls__button_prev" type="button" aria-label="Предыдущий слайд"></button>
             <div class="carousel-controls__indicators"></div>
-            <button class="button button_solid button_round carousel-controls__button carousel-controls__button_next" type="button" aria-label="Следующий слайд"></button>                
+            <button class="button button_solid button_round carousel-controls__button carousel-controls__button_next" type="button" aria-label="Следующий слайд"></button>
         </div>
     </template>
     <template id="tpl-carousel-counter">
