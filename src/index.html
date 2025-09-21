@@ -8,10 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <link rel="preload" fetchpriority="high" as="image" href="assets/images/concrete.webp" type="image/webp">
 </head>
 <body>
     <main class="main">
-        <section class="intro" id="intro">
+        <div class="intro" id="intro">
             <div class="intro__circle">
                 <div class="intro__circle-inner"></div>
             </div>
@@ -46,7 +47,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
         <div class="running-line running-line_top">
             <div class="running-line__group" role="list">
                 <p class="running-line__message" role="listitem">Дело помощи утопающим — дело рук самих утопающих!</p>
@@ -137,7 +138,7 @@
                         <div class="carousel__slide" data-slide="1">
                             <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Хозе-Рауль Капабланка" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" alt="Хозе-Рауль Капабланка" class="participants__card-image">
                                 </figure>
                                 <div class="participants__card-name" itemprop="name">Хозе-Рауль Капабланка</div>
                                 <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
@@ -147,7 +148,7 @@
                         <div class="carousel__slide" data-slide="2">
                             <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Эммануил Ласкер" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" alt="Эммануил Ласкер" class="participants__card-image">
                                 </figure>
                                 <div class="participants__card-name" itemprop="name">Эммануил Ласкер</div>
                                 <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
@@ -157,7 +158,7 @@
                         <div class="carousel__slide" data-slide="3">
                             <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Александр Алехин" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" alt="Александр Алехин" class="participants__card-image">
                                 </figure>
                                 <div class="participants__card-name" itemprop="name">Александр Алехин</div>
                                 <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
@@ -167,7 +168,7 @@
                         <div class="carousel__slide" data-slide="4">
                             <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Арон Нимцович" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" alt="Арон Нимцович" class="participants__card-image">
                                 </figure>
                                 <div class="participants__card-name" itemprop="name">Арон Нимцович</div>
                                 <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
@@ -177,7 +178,7 @@
                         <div class="carousel__slide" data-slide="5">
                             <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Рихард Рети" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" alt="Рихард Рети" class="participants__card-image">
                                 </figure>
                                 <div class="participants__card-name" itemprop="name">Рихард Рети</div>
                                 <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
@@ -187,7 +188,7 @@
                         <div class="carousel__slide" data-slide="6">
                             <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Остап Бендер" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" alt="Остап Бендер" class="participants__card-image">
                                 </figure>
                                 <div class="participants__card-name" itemprop="name">Остап Бендер</div>
                                 <div class="participants__card-rank" itemprop="jobTitle">Гроссмейстер</div>

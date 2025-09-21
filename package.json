@@ -7,9 +7,9 @@
     "type": "commonjs",
     "main": "index.js",
     "scripts": {
-        "start": "http-server -g -b -a 0.0.0.0 -p 30451 -o -c-1 src/"
+        "start": "serve -l tcp://0.0.0.0:30451 -c ../serve.json src/"
     },
     "devDependencies": {
-        "http-server": "~14.1.1"
+        "serve": "^14.2.5"
     }
 }
