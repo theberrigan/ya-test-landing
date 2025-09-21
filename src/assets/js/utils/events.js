@@ -24,3 +24,26 @@ export const addDelegatedListener = (rootEl, eventName, selectors, fn, options) 
         }
     }, options);
 };
+
+export const throttle = (fn, timeLimit) => {
+    let lastTime = null;
+    let timeout  = null;
+
+    return (...args) => {
+        if (timeout === null) {
+            fn(...args);
+            lastTime = Date.now();
+        } else {
+            const delay = Math.max(timeLimit - (Date.now() - lastTime), 0);
+
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                if ((Date.now() - lastTime) >= timeLimit) {
+                    fn(...args);
+                    lastTime = Date.now();
+                }
+            }, delay);
+        }
+    };
+};

@@ -1,15 +1,13 @@
 import { Carousel } from './utils/carousel.js';
 import { addDelegatedListener } from './utils/events.js';
-import { ListenerStore } from './utils/listener-store.js';
-
-
+import { SectionAnimator } from './utils/section-animator.js';
 
 
 const createParticipantsCarousel = () => {
-    const carousel = Carousel.create({
+    Carousel.create({
         rootEl: document.body.querySelector('.participants__carousel'),
         controlsNestEl: document.body.querySelector('.participants__carousel-controls'),
-        //autoPlay: true,
+        autoPlay: true,
         autoPlayDelay: 4000,
         loop: true,
         breakpoints: [
@@ -29,117 +27,8 @@ const createParticipantsCarousel = () => {
     });
 };
 
-const throttle = (fn, timeLimit) => {
-    let lastTime = null;
-    let timeout  = null;
-
-    return (...args) => {
-        if (timeout === null) {
-            fn(...args);
-            lastTime = Date.now();
-        } else {
-            const delay = Math.max(timeLimit - (Date.now() - lastTime), 0);
-
-            clearTimeout(timeout);
-
-            timeout = setTimeout(() => {
-                if ((Date.now() - lastTime) >= timeLimit) {
-                    fn(...args);
-                    lastTime = Date.now();
-                }
-            }, delay);
-        }
-    };
-};
-
-class SectionAnimator {
-    #elements  = null;
-    #listeners = new ListenerStore();
-    #overlapPoints = null;
-
-    static create (els) {
-        return new SectionAnimator().#setup(els);
-    }
-
-    #destroy = () => {
-        this.#listeners.destroy();
-
-        this.#elements = null;
-    };
-
-    #setup = (els) => {
-        this.#setupElements(els);
-        this.#setupListeners();
-        this.#checkVisibility(true);
-
-        return this;
-    };
-
-    #setupElements = (els) => {
-        this.#elements = els.filter(el => el).map((item) => {
-            return {
-                ...item,
-                isDone: false
-            };
-        });
-    };
-
-    #setupListeners = () => {
-        this.#listeners.add(window, 'scroll', throttle(() => this.#checkVisibility(false), 250));
-        this.#listeners.add(window, 'resize', throttle(() => this.#checkVisibility(true), 250));
-    };
-
-    #checkOverlap = (el) => {
-        const points = this.#overlapPoints;
-        const rect = el.getBoundingClientRect();
-
-        return (
-            rect.top    >= points.top && rect.top    <= points.bottom ||  // rect.top between points
-            rect.bottom >= points.top && rect.bottom <= points.bottom ||  // rect.bottom between points
-            rect.top    <= points.top && rect.bottom >= points.bottom     // points are inside rect
-        );
-    };
-
-    #updatePoints = () => {
-        const viewportHeight = document.documentElement.clientHeight || window.innerHeight;
-        const heightFraction = 0.5;
-
-        const top = (viewportHeight * (1 - heightFraction)) / 2;
-        const bottom = viewportHeight - top;
-
-        this.#overlapPoints = { top, bottom };
-    }
-
-    #checkVisibility = (updatePoints = false) => {
-        if (updatePoints || !this.#overlapPoints) {
-            this.#updatePoints();
-        }
-
-        let isComplete = true;
-
-        for (let item of this.#elements) {
-            if (!item.isDone && this.#checkOverlap(item.el)) {
-                item.el.classList.add(item.animClass);
-
-                item.isDone = true;
-            }
-
-            isComplete &&= item.isDone;
-        }
-
-        if (isComplete) {
-            this.#destroy();
-        }
-    };
-}
-
-
-const main = () => {
-    createParticipantsCarousel();
-
-    // ------------
-
-    const wrapperEl = document.body.querySelector('.stages-wrapper');
+const createStagesCarousel = () => {
+    const wrapperEl = document.body.querySelector('.stages__wrapper');
     const carouselEl = document.body.querySelector('.stages__carousel');
     const controlsNestEl = document.body.querySelector('.stages__carousel-controls');
 
@@ -149,7 +38,7 @@ const main = () => {
         const rootWidth = entries[0].borderBoxSize[0].inlineSize;
 
         if (rootWidth < 716) {
-            wrapperEl.classList.remove('stages-wrapper_grid');
+            wrapperEl.classList.remove('stages__wrapper_grid');
 
             carousel ||= Carousel.create({
                 rootEl: carouselEl,
@@ -157,16 +46,16 @@ const main = () => {
                 dots: true,
             });
         } else {
-            wrapperEl.classList.add('stages-wrapper_grid');
+            wrapperEl.classList.add('stages__wrapper_grid');
 
             carousel = carousel?.destroy();
         }
     });
 
     resizeObserver.observe(carouselEl);
+};
 
-    // ------------
-
+const createAnchorsHandler = () => {
     addDelegatedListener(document.documentElement, 'click', `a[href^='#']`, (e) => {
         e.preventDefault();
 
@@ -181,17 +70,14 @@ const main = () => {
         if (el) {
             el.scrollIntoView({
                 behavior: 'smooth',
-                block: 'center'
+                block: e.target.dataset.scrollAlignment ?? 'center'
             });
         }
     });
+};
 
-    // ------------
-
-    // document.querySelector('.intro').classList.add('intro_animated');
-    // const introEl = document.querySelector('.intro');
-
-    const animator = SectionAnimator.create([
+const createSectionAnimator = () => {
+    SectionAnimator.create([
         {
             el: document.getElementById('intro'),
             animClass: 'intro_animated'
@@ -213,6 +99,13 @@ const main = () => {
             animClass: 'participants_animated'
         },
     ]);
+};
+
+const main = () => {
+    createAnchorsHandler();
+    createSectionAnimator();
+    createStagesCarousel();
+    createParticipantsCarousel();
 };
 
 main();

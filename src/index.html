@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <base href="/">
-    <!--TODO: <meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>Клуб четырех коней</title>
+    <meta name="description" content="Клуб четырех коней – превратите уездный город в столицу земного шара">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-    <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
     <main class="main">
@@ -39,10 +38,10 @@
                     </h2>
                     <div class="intro__buttons">
                         <div class="intro__button-wrap">
-                            <a class="button intro__button intro__button_solid" href="#support">Поддержать шахматную&nbsp;мысль</a>
+                            <a class="button intro__button intro__button_solid" href="#support" data-scroll-alignment="center">Поддержать шахматную&nbsp;мысль</a>
                         </div>
                         <div class="intro__button-wrap">
-                            <a class="button intro__button intro__button_outline" href="#details">Подробнее о&nbsp;турнире</a>
+                            <a class="button intro__button intro__button_outline" href="#details" data-scroll-alignment="start">Подробнее о&nbsp;турнире</a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +65,7 @@
                 <div class="support__image"></div>
             </section>
             <section class="details" id="details">
-                <div class="details__text">и Сеанс <strong>одновременной игры в&nbsp;шахматы на&nbsp;160 досках</strong> гроссмейстера О.&nbsp;Бендера</div>
+                <div class="details__text">И сеанс <strong>одновременной игры в&nbsp;шахматы на&nbsp;160&nbsp;досках</strong> гроссмейстера О.&nbsp;Бендера</div>
                 <div class="details__image"></div>
                 <div class="details__table-nest">
                     <table class="details__table">
@@ -77,7 +76,7 @@
                             </tr>
                             <tr>
                                 <th>Дата и&nbsp;время мероприятия:</th>
-                                <td>22 июня 1927&nbsp;г. в&nbsp;18:00</td>
+                                <td>22&nbsp;июня 1927&nbsp;г. в&nbsp;18:00</td>
                             </tr>
                             <tr>
                                 <th>Стоимость входных билетов:</th>
@@ -105,8 +104,8 @@
                         <span class="stages__header-h4-text">Будущие источники обогащения васюкинцев</span>
                     </span>
                 </header>
-                <div class="stages-wrapper">
-                    <div class="stages-content stages-content_grid carousel stages__carousel">
+                <div class="stages__wrapper stages__wrapper_grid">
+                    <div class="stages__content carousel stages__carousel">
                         <div class="stages__cards carousel__slides" role="list">
                             <div class="stages__cards-group carousel__slide">
                                 <div class="stages__card" role="listitem" data-number="1">Строительство железнодорожной магистрали Москва-Васюки</div>
@@ -127,70 +126,71 @@
                             </div>
                         </div>
                     </div>
+                    <div class="stages__plane"></div>
                 </div>
                 <div class="stages__carousel-controls"></div>
             </section>
             <section class="participants" id="participants">
                 <h3 class="participants__header">Участники турнира</h3>
-                <div class="carousel carousel_mounted participants__carousel" style="/* TODO: font-size: 100px; background-color: #999; box-shadow: inset 0 0 0 1px #000; */">
+                <div class="carousel carousel_mounted participants__carousel">
                     <div class="carousel__slides">
                         <div class="carousel__slide" data-slide="1">
-                            <div class="participants__card">
+                            <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Хозе-Рауль Капабланка" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Хозе-Рауль Капабланка" class="participants__card-image">
                                 </figure>
-                                <div class="participants__card-name">Хозе-Рауль Капабланка</div>
-                                <div class="participants__card-rank">Чемпион мира по шахматам</div>
+                                <div class="participants__card-name" itemprop="name">Хозе-Рауль Капабланка</div>
+                                <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
                                 <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="2">
-                            <div class="participants__card">
+                            <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Эммануил Ласкер" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Эммануил Ласкер" class="participants__card-image">
                                 </figure>
-                                <div class="participants__card-name">Эммануил Ласкер</div>
-                                <div class="participants__card-rank">Чемпион мира по шахматам</div>
+                                <div class="participants__card-name" itemprop="name">Эммануил Ласкер</div>
+                                <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
                                 <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="3">
-                            <div class="participants__card">
+                            <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Александр Алехин" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Александр Алехин" class="participants__card-image">
                                 </figure>
-                                <div class="participants__card-name">Александр Алехин</div>
-                                <div class="participants__card-rank">Чемпион мира по шахматам</div>
+                                <div class="participants__card-name" itemprop="name">Александр Алехин</div>
+                                <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
                                 <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="4">
-                            <div class="participants__card">
+                            <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Арон Нимцович" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Арон Нимцович" class="participants__card-image">
                                 </figure>
-                                <div class="participants__card-name">Арон Нимцович</div>
-                                <div class="participants__card-rank">Чемпион мира по шахматам</div>
+                                <div class="participants__card-name" itemprop="name">Арон Нимцович</div>
+                                <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
                                 <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="5">
-                            <div class="participants__card">
+                            <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Рихард Рети" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Рихард Рети" class="participants__card-image">
                                 </figure>
-                                <div class="participants__card-name">Рихард Рети</div>
-                                <div class="participants__card-rank">Чемпион мира по шахматам</div>
+                                <div class="participants__card-name" itemprop="name">Рихард Рети</div>
+                                <div class="participants__card-rank" itemprop="jobTitle">Чемпион мира по&nbsp;шахматам</div>
                                 <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
                         <div class="carousel__slide" data-slide="6">
-                            <div class="participants__card">
+                            <div class="participants__card" itemscope itemtype="https://schema.org/Person">
                                 <figure class="participants__card-figure">
-                                    <img src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Остап Бендер" class="participants__card-image">
+                                    <img itemprop="image" src="assets/images/participant.webp" srcset="assets/images/participant.webp 1x, assets/images/participant@2x.webp 2x" alt="Остап Бендер" class="participants__card-image">
                                 </figure>
-                                <div class="participants__card-name">Остап Бендер</div>
-                                <div class="participants__card-rank">Гроссмейстер</div>
+                                <div class="participants__card-name" itemprop="name">Остап Бендер</div>
+                                <div class="participants__card-rank" itemprop="jobTitle">Гроссмейстер</div>
                                 <a href="https://rutube.ru/video/c6cc4d620b1d4338901770a44b3e82f4/" target="_blank" class="button participants__card-button">Подробнее</a>
                             </div>
                         </div>
@@ -235,13 +235,6 @@
             <div class="carousel-controls__dot"></div>
         </div>
     </template>
-
-    <!--
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
-        <symbol viewBox="0 0 12 8" id="svg-dropdown-arrow-down">
-            <path style="fill: currentColor;" d="M6,7.4141,1.293,2.707A1,1,0,0,1,2.707,1.293L6,4.5859,9.293,1.293a1,1,0,0,1,1.414,1.414Z"></path>
-        </symbol>
-    </svg>
-    -->
+    <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

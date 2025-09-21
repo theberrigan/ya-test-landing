@@ -9,16 +9,11 @@
 
     --font-header-light: 300;
     --font-header-normal: normal;
-    --font-header-medium: 500;
-    --font-header-semi-bold: 600;
     --font-header-bold: bold;
-    --font-header-black: 900;
 
     --font-text-normal: normal;
     --font-text-medium: 500;
     --font-text-semi-bold: 600;
-    --font-text-bold: bold;
-    --font-text-black: 900;
 
     --color-dark-gray-1: 31 31 31;
     --color-dark-gray-2: #313131;
@@ -244,7 +239,7 @@ body {
     font-style: normal;
     background-color: #FFF;
     color: var(--color-dark-gray-2);
-    /*overflow-x: hidden;*/  /* TODO: uncomment */
+    /*overflow-x: hidden;*/
 }
 
 h1,
@@ -334,7 +329,7 @@ s {
     position: relative;
     background-color: var(--color-intro-bg);
     width: 100%;
-    min-height: calc(774px - 74 * 1rem);
+    height: calc(774px - 74 * 1rem);
     overflow: hidden;
 }
 
@@ -439,7 +434,7 @@ s {
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-size: 100% 100%;
     opacity: 0;
 }
@@ -785,6 +780,12 @@ s {
     padding-top: 1px;
 }
 
+@-moz-document url-prefix() {
+    .running-line {
+        padding-top: 0;
+    }
+}
+
 .running-line_top {
 
 }
@@ -853,10 +854,12 @@ s {
 
 .support__text-1 {
     grid-area: text1;
+    letter-spacing: 0.4px;
 }
 
 .support__text-2 {
     grid-area: text2;
+    letter-spacing: 0.3px;
 }
 
 .support__text-1,
@@ -923,6 +926,10 @@ s {
         align-items: center;
     }
 
+    .support__text strong {
+        letter-spacing: 0.1px;
+    }
+
     .support__text-group {
         display: block;
         transform: translateX(-10%);
@@ -940,6 +947,14 @@ s {
     .support__text-1,
     .support__text-2 {
         grid-area: none;
+    }
+
+    .support__text-1 {
+        letter-spacing: 0.5px;
+    }
+
+    .support__text-2 {
+        letter-spacing: 0.3px;
     }
 
     .support__image {
@@ -963,7 +978,7 @@ s {
 
 .details__text {
     grid-area: text;
-    font-family: 'YaMerriweather';
+    font-family: var(--font-header);
     font-size: calc(28px + 8 * 1rem);
     font-weight: normal;
     line-height: 1.35;
@@ -973,7 +988,6 @@ s {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-
     transform: translateX(10%);
     opacity: 0;
     transition-property: transform, opacity;
@@ -995,7 +1009,6 @@ s {
     grid-area: image;
     margin: 0 auto;
     overflow: visible;
-
     transform: scale(0.3);
     opacity: 0;
     transition-property: transform, opacity;
@@ -1076,7 +1089,7 @@ s {
 }
 
 .details__table td {
-    font-weight: 600;
+    font-weight: var(--font-text-semi-bold);
 }
 
 .details__table s {
@@ -1092,7 +1105,6 @@ s {
     padding-top: calc(26px + 8 * 1rem);
     width: 100%;
     margin: 0 auto;
-
     transform: translateX(10%);
     opacity: 0;
     transition-property: transform, opacity;
@@ -1199,7 +1211,6 @@ s {
 
 .stages__header {
     max-width: 790px;
-
     transform: translateX(10%);
     opacity: 0;
     transition-property: transform, opacity;
@@ -1214,20 +1225,13 @@ s {
 }
 
 .stages__header-h3 {
-    font-family: 'YaMerriweather';
+    font-family: var(--font-header);
     font-size: calc(36px + 18 * 1rem);
     font-weight: normal;
     line-height: 1.1;
     letter-spacing: 0.6px;
     text-transform: uppercase;
     vertical-align: middle;
-}
-
-@media (min-width: 768px) {
-    .stages__header-h3 {
-        line-height: 1.2;
-        letter-spacing: 1px;
-    }
 }
 
 .stages__header-h4 {
@@ -1237,7 +1241,6 @@ s {
     font-weight: normal;
     line-height: 1.2;
     margin-top: 13px;
-
     opacity: 0;
     transition-property: opacity;
     transition-duration: 0.2s;
@@ -1274,36 +1277,38 @@ s {
     }
 }
 
-.stages-wrapper {
+.stages__wrapper {
     position: relative;
     margin-top: 148px;
     overflow: visible;
 }
 
-.stages-wrapper_grid {
+.stages__wrapper_grid {
     margin-top: 53px;
 }
 
-.stages-wrapper::after {
-    content: '';
-    display: block;
+.stages__plane {
     position: absolute;
-
     left: 50%;
     top: 0;
     translate: -47% -74%;
     rotate: -3.5deg;
-
     width: calc(302px + 58 * 1rem);
     aspect-ratio: 360 / 193;
+}
+
+.stages__plane::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
     background-image: image-set(
         url('../images/plane.webp') 1x,
         url('../images/plane@2x.webp') 2x
     );
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-size: 100% 100%;
-
     transform: translate(20%, 2%);
     opacity: 0;
     transition-property: transform, opacity;
@@ -1312,12 +1317,12 @@ s {
     transition-delay: 0.55s;
 }
 
-.stages_animated .stages-wrapper::after {
+.stages_animated .stages__plane::after {
     transform: translateX(0);
     opacity: 1;
 }
 
-.stages-wrapper_grid::after {
+.stages__wrapper_grid .stages__plane {
     top: unset;
     left: unset;
     right: 0;
@@ -1327,7 +1332,7 @@ s {
 }
 
 @media (min-width: 1100px) {
-    .stages-wrapper_grid::after {
+    .stages__wrapper_grid .stages__plane {
         top: 50%;
         left: unset;
         right: 0;
@@ -1336,7 +1341,7 @@ s {
     }
 }
 
-.stages-content {
+.stages__content {
     transform: translateY(30px);
     opacity: 0;
     transition-property: transform, opacity;
@@ -1345,12 +1350,12 @@ s {
     transition-delay: 0.15s;
 }
 
-.stages_animated .stages-content {
+.stages_animated .stages__content {
     transform: translateY(0);
     opacity: 1;
 }
 
-.stages-wrapper_grid .stages__cards {
+.stages__wrapper_grid .stages__cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, auto);
@@ -1365,7 +1370,7 @@ s {
 }
 
 @media (min-width: 1100px) {
-    .stages-wrapper_grid .stages__cards {
+    .stages__wrapper_grid .stages__cards {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto auto;
         grid-template-areas:
@@ -1379,7 +1384,7 @@ s {
     padding: 47px 0 20px;
 }
 
-.stages-wrapper_grid .stages__cards-group {
+.stages__wrapper_grid .stages__cards-group {
     display: contents;
     padding: 0;
 }
@@ -1393,12 +1398,12 @@ s {
     flex-flow: row nowrap;
     align-items: flex-start;
     font-size: calc(18px + 2 * 1rem);
-    font-weight: 500;
+    font-weight: var(--font-text-medium);
     line-height: 1.2;
     padding: 15px 20px;
 }
 
-.stages-wrapper_grid .stages__card {
+.stages__wrapper_grid .stages__card {
     padding: 20px;
     background: url('../images/card_bg.webp') repeat left top;
 }
@@ -1415,7 +1420,7 @@ s {
     border-radius: 50%;
     background-color: #FFF;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: var(--font-text-semi-bold);
     line-height: 1.2;
     padding: 0 0 1px 1px;
     margin-right: 17px;
@@ -1456,10 +1461,8 @@ s {
     grid-area: _7;
 }
 
-@media (min-width: 768px) {
-    .stages__card[data-number='7'] {
-        padding-right: 300px;
-    }
+.stages__wrapper_grid .stages__card[data-number='7'] {
+    padding-right: 300px;
 }
 
 .carousel_mounted .stages__carousel {
@@ -1476,9 +1479,19 @@ s {
 
 .stages__carousel-controls {
     margin-top: 28px;
+
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+    transition-delay: 0.55s;
 }
 
-.stages-wrapper_grid .stages__carousel-controls {
+.stages_animated .stages__carousel-controls {
+    opacity: 1;
+}
+
+.stages__wrapper_grid .stages__carousel-controls {
     display: none;
 }
 
@@ -1498,18 +1511,39 @@ s {
 
 .participants__header {
     grid-area: header;
-    font-family: 'YaMerriweather';
+    font-family: var(--font-header);
     font-size: calc(36px + 18 * 1rem);
     font-weight: normal;
     line-height: 1.1;
     text-transform: uppercase;
     letter-spacing: 0.6px;
+    transform: translateX(10%);
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+    transition-delay: 0.15s;
+}
+
+.participants_animated .participants__header {
+    transform: translateX(0);
+    opacity: 1;
 }
 
 .participants__carousel {
     grid-area: carousel;
     margin-top: calc(0px + 16 * 1rem);
-    /*max-height: 605px;*/
+    transform: translateY(30px);
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+    transition-delay: 0.15s;
+}
+
+.participants_animated .participants__carousel {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .participants__carousel-controls {
@@ -1518,6 +1552,15 @@ s {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    transition-delay: 0.4s;
+}
+
+.participants_animated .participants__carousel-controls {
+    opacity: 1;
 }
 
 .participants__card {
@@ -1543,7 +1586,7 @@ s {
 
 .participants__card-name {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: var(--font-text-semi-bold);
     line-height: 1.2;
     text-align: center;
     color: #151515;
@@ -1564,7 +1607,7 @@ s {
     height: 35px;
     border-radius: 18px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: var(--font-text-semi-bold);
     line-height: 1.2;
     white-space: nowrap;
     color: #3057A2;
@@ -1575,7 +1618,6 @@ s {
 }
 
 .participants__card-button:hover {
-    /*font-weight: 300;*/
     font-weight: normal;
     color: #FFF;
     background-color: #3057A2;
@@ -1594,10 +1636,6 @@ s {
     .participants__card-rank {
         margin-top: 5px;
     }
-
-    .participants__carousel {
-        /*max-height: 601px;*/
-    }
 }
 
 @media (min-width: 920px) {
@@ -1611,10 +1649,6 @@ s {
 
     .participants__header {
         white-space: nowrap;
-    }
-
-    .participants__carousel {
-        /*max-height: 550px;*/
     }
 
     .participants__carousel-controls {
@@ -1739,7 +1773,7 @@ s {
     width: var(--button-size);
     height: var(--button-size);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-size: cover;
 }
 
@@ -1751,7 +1785,6 @@ s {
     background-image: url('../images/button_next.svg');
 }
 
-/* TODO: determine breakpoint */
 @media (min-width: 480px) {
     .carousel-controls__button {
         --button-size: 44px;

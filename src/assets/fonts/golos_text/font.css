@@ -1,13 +1,5 @@
 @font-face {
     font-family: 'YaGolosText';
-    src: url('GolosText-Bold.woff2') format('woff2');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'YaGolosText';
     src: url('GolosText-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
@@ -26,22 +18,6 @@
     font-family: 'YaGolosText';
     src: url('GolosText-Regular.woff2') format('woff2');
     font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'YaGolosText';
-    src: url('GolosText-Black.woff2') format('woff2');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'YaGolosText';
-    src: url('GolosText-ExtraBold.woff2') format('woff2');
-    font-weight: bold;
     font-style: normal;
     font-display: swap;
 }

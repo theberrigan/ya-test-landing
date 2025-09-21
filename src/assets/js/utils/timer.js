@@ -11,15 +11,13 @@ export class Timer {
         this.#fn    = fn;
     }
 
-    // only reset timeout
     #clear = () => {
         if (this.#timeout !== null) {
             clearTimeout(this.#timeout);
             this.#timeout = null;
-        } 
+        }
     };
 
-    // completely reset state
     #reset = () => {
         this.#clear();
         this.#remTime    = null;
@@ -35,7 +33,6 @@ export class Timer {
         }, delay);
     };
 
-    // start timer from the beginning
     start = () => {
         this.#reset();
         this.#setTimeout(this.#delay);
@@ -49,17 +46,15 @@ export class Timer {
     // alias
     stop = this.#reset;
 
-    // works together with "continue"
     pause = () => {
         if (this.#invokeTime !== null) {
             this.#clear();
-            this.#remTime = Math.max(0, this.#invokeTime - performance.now());            
+            this.#remTime = Math.max(0, this.#invokeTime - performance.now());
         }
 
         return this;
     };
 
-    // works together with "pause"
     continue = () => {
         if (this.#remTime === null) {
             this.start();

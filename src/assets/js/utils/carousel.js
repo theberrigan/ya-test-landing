@@ -100,7 +100,7 @@ export class Carousel {
 
     #redrawTotalSlides = () => {
         if (!this.#dots && this.#countTotalEl) {
-            this.#countTotalEl.textContent = String(this.#totalSlideCount);            
+            this.#countTotalEl.textContent = String(this.#totalSlideCount);
         }
     };
 
@@ -161,14 +161,15 @@ export class Carousel {
 
                 const dotsEl = templateEl.content.firstElementChild.cloneNode(true);
                 const dotEl  = dotsEl.querySelector('.carousel-controls__dot');
-                const dotEls = this.#dotEls = [ dotEl ];
+
+                this.#dotEls = [ dotEl ];
 
                 const extraDotCount = this.#slideEls.length - 1;
 
                 for (let i = 0; i < extraDotCount; ++i) {
                     const extraDotEl = dotEl.cloneNode(true);
 
-                    dotEls.push(extraDotEl);
+                    this.#dotEls.push(extraDotEl);
                     dotsEl.appendChild(extraDotEl);
                 }
 
@@ -274,7 +275,7 @@ export class Carousel {
         return this.#currentSlideIndex === (this.#totalSlideCount - 1);
     };
 
-    #changeCounter = (direction) => {        
+    #changeCounter = (direction) => {
         this.#currentSlideIndex += direction;
 
         if (this.#currentSlideIndex < 0) {
